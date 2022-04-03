@@ -5,7 +5,8 @@ const USERS_URL = `http://localhost:9000/list`;
 export default function Table () {
   const [page, setPage] = useState(0);
   const [data, setData] = useState([]);
-    
+ 
+
   useEffect(() => {
       const queryString = `/${page}`
       const getData = async () => await fetch(USERS_URL+queryString);
@@ -16,25 +17,33 @@ export default function Table () {
         })
   },[page]);
   const previousPage= () => {
-    if(page ===0) {
+    if(page === 0) {
       setPage(page)
+      window.history.pushState({}, undefined, `/page/${page}`);
     }
     else{
-      setPage(page-1)
+      setPage(page-1);
+      window.history.pushState({}, undefined, `/page/${page-1}`);
     }
   };
     const nextPage= () => {
-    if(page ===2) {
-      setPage(page)
-    }
-    else{
-      setPage(page+1)
-    }
+      if(page ===2) {
+        window.history.pushState({}, undefined, `/page/${page}`);
+        setPage(page);
+      }
+      else{
+        window.history.pushState({}, undefined, `/page/${page+1}`);
+        setPage(page+1);
+      }
   };
   const lastPage= () => {
+     window.history.pushState({}, undefined, `/page/${2}`);
     setPage(2);
   };
-  const firstPage= () => setPage(0);
+  const firstPage= () => {
+    setPage(0);
+    window.history.pushState({}, undefined, `/page/${0}`);
+  };
     const customStyle = {cursor:'not-allowed'};
     const normal = { cursor: 'pointer'};
     const blockedPrevious = page=== 0 ? customStyle : normal;
