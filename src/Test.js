@@ -12,22 +12,45 @@ export default function Table () {
       getData()
       .then(response => response.json())
       .then(resp => {
-        setData(resp.results)
+        setData(resp)
         })
   },[page]);
-
+  const previousPage= () => {
+    if(page ===0) {
+      setPage(page)
+    }
+    else{
+      setPage(page-1)
+    }
+  };
+    const nextPage= () => {
+    if(page ===2) {
+      setPage(page)
+    }
+    else{
+      setPage(page+1)
+    }
+  };
+  const lastPage= () => {
+    setPage(2);
+  };
+  const firstPage= () => setPage(0);
     const customStyle = {cursor:'not-allowed'};
     const normal = { cursor: 'pointer'};
-    const buttonStyle = data.length === 0 ?customStyle : normal;
+    const blockedPrevious = page=== 0 ? customStyle : normal;
+    const blockedNext = page=== 2 ? customStyle : normal;
+    
 
   return (
     <div>
       <table className="table">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th></th>
+            <th>Precio</th>
+            <th>Id</th>
           </tr>
         </thead>
         <tbody>
@@ -49,10 +72,10 @@ export default function Table () {
         </tbody>
       </table>
       <section className="pagination">
-        <button style= {buttonStyle} className="first-page-btn" onClick = {() => setPage(0)}>first</button>
-        <button style= {buttonStyle} className="previous-page-btn"  onClick = {() => setPage(page-1)}>previous</button>
-        <button style= {buttonStyle} className="next-page-btn" onClick = {() => setPage(page+1)} >next</button>
-        <button style= {buttonStyle} className="last-page-btn" >last</button>
+        <button style= {blockedPrevious} className="first-page-btn" onClick = {firstPage}>first</button>
+        <button style= {blockedPrevious} className="previous-page-btn"  onClick = {previousPage}>previous</button>
+        <button style= {blockedNext} className="next-page-btn" onClick = {nextPage} >next</button>
+        <button style= {blockedNext} onClick = {lastPage} className="last-page-btn" >last</button>
       </section>
     </div>
   );
