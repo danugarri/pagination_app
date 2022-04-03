@@ -1,15 +1,17 @@
 import React, {useState, useEffect} from 'react';
 
-const USERS_URL = `http://localhost:9000/list`;
+// const url = `http://localhost:9000/list`;
+ const url = 'https://pagination-api-dg.herokuapp.com/list';
 
 export default function Table () {
+
   const [page, setPage] = useState(0);
   const [data, setData] = useState([]);
  
 
   useEffect(() => {
       const queryString = `/${page}`
-      const getData = async () => await fetch(USERS_URL+queryString);
+      const getData = async () => await fetch(url+queryString);
       getData()
       .then(response => response.json())
       .then(resp => {
