@@ -1,0 +1,15 @@
+
+#container{
+      text-align: center;
+}.table{
+    margin: 30px auto;
+}
+button{
+     margin:10px
+}
+button:hover{
+   background-color: rgb(216, 216, 236);
+}
+button:focus{
+    background-color: rgb(138, 138, 245);
+}

@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import './Test.css';
 
 // const url = `http://localhost:9000/list`;
  const url = 'https://pagination-api-dg.herokuapp.com/list';
@@ -53,7 +54,8 @@ export default function Table () {
     
 
   return (
-    <div>
+    <div id ='container'>
+      <h1>STOCK</h1>
       <table className="table">
         <thead>
           <tr>
